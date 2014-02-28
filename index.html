@@ -30,13 +30,10 @@
       */
 
       $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
+//        var $body = $('body');
+//        $body.html('');
 
         var visibleTweets = [];
-
-        var $button = $("<button type='button' class='center refresh'>Refresh tweets: 0 new tweets available</button>");
-        $button.prependTo($('body'));
 
         var addTweets = function (){
           var index = 0;
@@ -46,10 +43,9 @@
               var $tweet = $("<div class='center tweet'></div>");
               var $tweetTime = tweet.created_at // Change date format later
               $tweet.html('@' + tweet.user + ': ' + $tweetTime + '<br/>' + tweet.message);
-              $tweet.insertAfter($button);  
+              $tweet.insertAfter($('button'));  
               visibleTweets.push(tweet.created_at);
             }
-
             index += 1;
           } 
         }
@@ -58,7 +54,7 @@
 
         $('button').on('click', function() {
           addTweets();
-          $('button').html('Refresh tweets: 0 new tweets available.');
+          $('button').html('Refresh tweets: 0 new tweets available');
           $('title').html('Twittler');
         });
 
@@ -73,9 +69,9 @@
               index += 1;
             }
             if (newTweets === 1) {
-              $('.refresh').html('Refresh tweets: 1 new tweet available');
+              $('button').html('Refresh tweets: 1 new tweet available');
             } else {
-              $('.refresh').html('Refresh tweets: ' + newTweets + ' new tweets available');
+              $('button').html('Refresh tweets: ' + newTweets + ' new tweets available');
             }
             if (newTweets >= 1) {
               $('title').html('(' + newTweets + ') Twittler');
@@ -86,5 +82,10 @@
       });
 
     </script>
+
+<!--    <div class="refresh"> -->
+      <button type='button' class='center'>Refresh tweets: 0 new tweets available</button>
+<!--    </div>  -->
+
   </body>
 </html>
