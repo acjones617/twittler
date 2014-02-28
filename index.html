@@ -3,6 +3,9 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+
+    <title>Twittler</title>
+
   </head>
   <body>
     <script>
@@ -34,7 +37,6 @@
 
         var $button = $("<button type='button'>Refresh tweets: 0 new tweets available</button>");
         $button.prependTo($('body'));
-
 
         var addTweets = function (){
           var index = 0;
@@ -72,6 +74,7 @@
             } else {
               $('button').html('Refresh tweets: ' + newTweets + ' new tweets available');
             }
+            $('title').html('(' + newTweets + ') Twittler');
           }, 1500);
 
       });
