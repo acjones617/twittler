@@ -40,11 +40,12 @@
           while(index < streams.home.length){
             var tweet = streams.home[index];
             if (visibleTweets.indexOf(tweet.created_at) == -1){
-              var $tweet = $("<div class='center tweet'></div>");
+              var $tweet = $("<div class='center tweet hidden'></div>");
               var $tweetTime = tweet.created_at // Change date format later
               $tweet.html('@' + tweet.user + ': ' + $tweetTime + '<br/>' + tweet.message);
               $tweet.insertAfter($('button'));  
               visibleTweets.push(tweet.created_at);
+              $tweet.removeClass('hidden');
             }
             index += 1;
           } 
@@ -83,9 +84,9 @@
 
     </script>
 
-<!--    <div class="refresh"> -->
+    <div class="refresh">
       <button type='button' class='center'>Refresh tweets: 0 new tweets available</button>
-<!--    </div>  -->
+    </div>
 
   </body>
 </html>
