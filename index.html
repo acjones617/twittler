@@ -3,9 +3,10 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <link rel="stylesheet" type="text/css" href="twittler_style.css">
+    
 
     <title>Twittler</title>
-
   </head>
   <body>
     <script>
@@ -35,7 +36,7 @@
 
         var visibleTweets = [];
 
-        var $button = $("<button type='button'>Refresh tweets: 0 new tweets available</button>");
+        var $button = $("<button type='button' class='refresh'>Refresh tweets: 0 new tweets available</button>");
         $button.prependTo($('body'));
 
         var addTweets = function (){
@@ -71,15 +72,15 @@
               index += 1;
             }
             if (newTweets === 1) {
-              $('button').html('Refresh tweets: 1 new tweet available.');
+              $('.refresh').html('Refresh tweets: 1 new tweet available.');
             } else {
-              $('button').html('Refresh tweets: ' + newTweets + ' new tweets available');
+              $('.refresh').html('Refresh tweets: ' + newTweets + ' new tweets available');
             }
             if (newTweets >= 1) {
               $('title').html('(' + newTweets + ') Twittler');
             }
 
-          }, 5000);
+          }, 3000);
 
       });
 
