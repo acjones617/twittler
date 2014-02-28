@@ -57,6 +57,7 @@
         $('button').on('click', function() {
           addTweets();
           $('button').html('Refresh tweets: 0 new tweets available.');
+          $('title').html('Twittler');
         });
 
         setInterval(function () {
@@ -74,8 +75,11 @@
             } else {
               $('button').html('Refresh tweets: ' + newTweets + ' new tweets available');
             }
-            $('title').html('(' + newTweets + ') Twittler');
-          }, 1500);
+            if (newTweets >= 1) {
+              $('title').html('(' + newTweets + ') Twittler');
+            }
+
+          }, 5000);
 
       });
 
