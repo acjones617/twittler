@@ -1,0 +1,15 @@
+
+<style type="text/css">
+html, body {
+  margin: 50px;
+  padding: 50px;
+  border: 50px;
+}
+
+button {
+	background-color: #ccc;
+	border-radius: 50px;
+  margin-left: 50px;
+  font-size: 30;
+}
+</style>
