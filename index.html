@@ -35,19 +35,21 @@
 
         var visibleTweets = [];
 
-        var $button = $("<button type='button' class='refresh center'>Refresh tweets: 0 new tweets available</button>");
+        var $button = $("<button type='button' class='center refresh'>Refresh tweets: 0 new tweets available</button>");
         $button.prependTo($('body'));
 
         var addTweets = function (){
           var index = 0;
           while(index < streams.home.length){
             var tweet = streams.home[index];
-            var $tweet = $("<div class='center tweet'></div>");
-            $tweet.text(tweet.created_at + '@' + tweet.user + ': ' + tweet.message);
             if (visibleTweets.indexOf(tweet.created_at) == -1){
+              var $tweet = $("<div class='center tweet'></div>");
+              var $tweetTime = tweet.created_at // Change date format later
+              $tweet.html('@' + tweet.user + ': ' + $tweetTime + '<br/>' + tweet.message);
               $tweet.insertAfter($button);  
+              visibleTweets.push(tweet.created_at);
             }
-            visibleTweets.push(tweet.created_at);
+
             index += 1;
           } 
         }
@@ -71,7 +73,7 @@
               index += 1;
             }
             if (newTweets === 1) {
-              $('.refresh').html('Refresh tweets: 1 new tweet available.');
+              $('.refresh').html('Refresh tweets: 1 new tweet available');
             } else {
               $('.refresh').html('Refresh tweets: ' + newTweets + ' new tweets available');
             }
