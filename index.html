@@ -4,7 +4,6 @@
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
     <link rel="stylesheet" type="text/css" href="twittler_style.css">
-    
 
     <title>Twittler</title>
   </head>
@@ -36,14 +35,14 @@
 
         var visibleTweets = [];
 
-        var $button = $("<button type='button' class='refresh'>Refresh tweets: 0 new tweets available</button>");
+        var $button = $("<button type='button' class='refresh center'>Refresh tweets: 0 new tweets available</button>");
         $button.prependTo($('body'));
 
         var addTweets = function (){
           var index = 0;
           while(index < streams.home.length){
             var tweet = streams.home[index];
-            var $tweet = $('<div></div>');
+            var $tweet = $("<div class='center tweet'></div>");
             $tweet.text(tweet.created_at + '@' + tweet.user + ': ' + tweet.message);
             if (visibleTweets.indexOf(tweet.created_at) == -1){
               $tweet.insertAfter($button);  
