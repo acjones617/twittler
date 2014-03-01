@@ -30,8 +30,8 @@
       */
 
       $(document).ready(function(){
-//        var $body = $('body');
-//        $body.html('');
+//       var $body = $('body');
+//       $body.html('');
 
         var visibleTweets = [];
 
@@ -55,7 +55,7 @@
 
         $('button').on('click', function() {
           addTweets();
-          $('button').html('Refresh tweets: 0 new tweets available');
+          $('button').html('0 new tweets available');
           $('title').html('Twittler');
         });
 
@@ -70,9 +70,9 @@
               index += 1;
             }
             if (newTweets === 1) {
-              $('button').html('Refresh tweets: 1 new tweet available');
-            } else {
-              $('button').html('Refresh tweets: ' + newTweets + ' new tweets available');
+              $('button').html('Fresh tweets: 1 new tweet available');
+            } else if (newTweets > 1) {
+              $('button').html('Fresh tweets: ' + newTweets + ' new tweets available');
             }
             if (newTweets >= 1) {
               $('title').html('(' + newTweets + ') Twittler');
@@ -85,7 +85,7 @@
     </script>
 
     <div class="refresh">
-      <button type='button' class='center'>Refresh tweets: 0 new tweets available</button>
+      <button type='button' class='center'>0 new tweets available</button>
     </div>
 
   </body>

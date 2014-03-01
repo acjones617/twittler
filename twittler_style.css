@@ -1,9 +1,10 @@
-
 <style type="text/css">
+
 html, body {
-	margin-left: 0px;
-	margin-right: 0px;
-	background-color: black;	
+	background-color: #fff;
+	background-size: 750px;
+	margin: auto;
+	background-image: url("http://www.todayandtomorrow.net/wp-content/uploads/2009/11/new_stripes.jpg");
 }
 
 button {
@@ -18,9 +19,9 @@ button {
 	margin-top: 40px;
 
 	color: rgba(218, 216, 217);
-	background-color: white;
+	background-color: rgba(163, 250, 246, 0.35);
 	border-radius: 2px;
-  font-size: 15px;
+  font-size: 18px;
 }
 
 .center {
@@ -33,7 +34,8 @@ button {
 	padding: 5px;
 	border-top-style: solid;
 	border-color: black;
-	background-color: rgba(218, 216, 217, 0.35);
+	background-color: rgba(163, 250, 246, 0.09);
+	font-size: 15px;
 }
 
 .hidden {
