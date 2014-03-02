@@ -97,6 +97,16 @@
 
         var tweetUsers = _.keys(streams.users)
 
+        var userTweets = function (thisUser){
+          _.each(streams.users[thisUser], function (tweetObj){
+            var $tweet = $("<div class='oldT'></div>");
+            var $tweetTime = tweetObj.created_at; // Change date format later
+            $tweet.html('@' + tweetObj.user + ': ' + $tweetTime + '<br/>' + tweetObj.message);
+            $tweet.insertAfter($('.tweeter').find('h1'));
+            $tweet.show();
+          });
+        }
+
         _.each(tweetUsers, function (user) {
           $('.'+user).click(function () {
             $('#myModal').reveal({
@@ -105,21 +115,12 @@
               closeonbackgroundclick: true,              //if you click background will modal close?
               dismissmodalclass: 'close-reveal-modal'    //the class of a button or element that will close an open modal
             });
-          $('.reveal-modal').find('h1').text(user);
-        });
-        })
-
-/*
-        $('.tweeterClick').click(function () {
-          $('#myModal').reveal({
-            animation: 'fadeAndPop',                   //fade, fadeAndPop, none
-            animationspeed: 300,                       //how fast animtions are
-            closeonbackgroundclick: true,              //if you click background will modal close?
-            dismissmodalclass: 'close-reveal-modal'    //the class of a button or element that will close an open modal
+            
+            $('.tweeter').find('h1').text('@'+user);
+            $('.tweeter').find('.oldT').remove();
+            userTweets(user);
           });
-          $('.reveal-modal').find('h1').text(tweetUsers);
-        });
-*/
+        })
 
       });
 
@@ -131,7 +132,6 @@
 
     <div id="myModal" class="reveal-modal tweeter">
       <h1>Modal Tweets</h1>
-      <p>Any content could go in here.</p>
       <a class="close-reveal-modal">&#215;</a>
     </div>
 
