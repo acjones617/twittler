@@ -2,7 +2,6 @@
 <html>
   <head profile>
     <script src="jquery.js"></script>
-    <script src="jquery-1.4.4.min.js" type="text/javascript"></script>
     <script src="data_generator.js"></script>
     <script src="jquery.reveal.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="twittler_style.css">
@@ -46,7 +45,7 @@
             if (visibleTweets.indexOf(tweet.created_at) == -1){
               var $tweet = $("<div class='center oldT'></div>");
               var $tweetTime = tweet.created_at // Change date format later
-              $tweet.html('@' + '<a href="#" data-reveal-id="myModal">'+tweet.user+'</a>' + ': ' + $tweetTime + '<br/>' + tweet.message);
+              $tweet.html('@' + '<a href="#" data-reveal-id="myModal" class="tweeterClick">'+tweet.user+'</a>' + ': ' + $tweetTime + '<br/>' + tweet.message);
               $tweet.insertAfter($('button'));  
 
               // New Tweets start as hidden, fade in over course of 1 second. Change to highlighted at first and then fade in?
@@ -60,21 +59,6 @@
         }
         
         addTweets();
-
-        // If Refresh Tweets button clicked, add new tweets, reset button and title text.
-        $('button').on('click', function() {
-          addTweets();
-          $('button').html('0 new tweets available');
-          $('title').html('Twittler');
-        });
-
-        //Options for myModal;
-        $('#myModal').reveal({
-          animation: 'fadeAndPop',                   //fade, fadeAndPop, none
-          animationspeed: 300,                       //how fast animtions are
-          closeonbackgroundclick: true,              //if you click background will modal close?
-          //dismissmodalclass: 'close-reveal-modal'    //the class of a button or element that will close an open modal
-        });
 
         // Every 3 seconds, check to see if new tweets have been written
         setInterval(function () {
@@ -98,7 +82,27 @@
 
           }, 3000);
 
-        // If someone clicks tweet user, then bring up something showing that user's tweets
+        // If Fresh Tweets button clicked, add new tweets, reset button and title text.
+        $('button').on('click', function() {
+          addTweets();
+          $('button').html('0 new tweets available');
+          $('title').html('Twittler');
+        });
+
+
+        // If someone clicks tweet user, then bring up modal showing that user's tweets
+        //Options for myModal;
+
+        $('.tweeterClick').click(function () {
+          $('#myModal').reveal({
+            animation: 'fadeAndPop',                   //fade, fadeAndPop, none
+            animationspeed: 300,                       //how fast animtions are
+            closeonbackgroundclick: true,              //if you click background will modal close?
+            dismissmodalclass: 'close-reveal-modal'    //the class of a button or element that will close an open modal
+          });
+          $('.reveal-modal').find('h1').text('tweet.user');
+        });
+
 
       });
 
@@ -108,8 +112,8 @@
       <button type='button' class='center'>0 new tweets available</button>
     </div>
 
-    <div id="myModal" class="reveal-modal">
-      <h1>Modal Title</h1>
+    <div id="myModal" class="reveal-modal tweeter">
+      <h1>Modal Tweets</h1>
       <p>Any content could go in here.</p>
       <a class="close-reveal-modal">&#215;</a>
     </div>
