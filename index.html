@@ -39,6 +39,41 @@
 
         var visibleTweets = [];
 
+        // If someone clicks tweet user, then bring up modal showing that user's tweets
+        
+
+        // Function that pulls up relevant tweets for specific user
+        var userTweets = function (thisUser){
+          _.each(streams.users[thisUser], function (tweetObj){
+            var $tweet = $("<div class='oldT'></div>");
+            var $tweetTime = tweetObj.created_at; // Change date format later
+            $tweet.html('@' + tweetObj.user + ': ' + $tweetTime + '<br/>' + tweetObj.message);
+            $tweet.insertAfter($('.tweeter').find('h1'));
+            $tweet.show();
+          });
+        }
+
+        // Sets each user link in feed to link to modal displaying that user's tweet history.
+        var functionalizeUserLink = function () {
+          var tweetUsers = _.keys(streams.users);
+
+          _.each(tweetUsers, function (user) {
+            $('.'+user).click(function () {
+              $('#myModal').reveal({
+                //Options for myModal;
+                animation: 'fadeAndPop',                   //fade, fadeAndPop, none
+                animationspeed: 300,                       //how fast animtions are
+                closeonbackgroundclick: true,              //if you click background will modal close?
+                dismissmodalclass: 'close-reveal-modal'    //the class of a button or element that will close an open modal
+              });
+            
+              $('.tweeter').find('h1').text('@'+user + ' tweet timeline');
+              $('.tweeter').find('.oldT').remove();
+              userTweets(user);
+            });
+          });
+        };
+
         var addTweets = function (){
           var index = 0;
           while(index < streams.home.length){
@@ -52,9 +87,14 @@
               // New Tweets start as hidden, fade in over course of 1 second. Change to highlighted at first and then fade in?
               $tweet.fadeIn(1000);
               visibleTweets.push(tweet.created_at);
+
             }
             index += 1;
           }
+
+          // Ensure modal works for all new user links
+          functionalizeUserLink();
+
           //$(.newT).animate({'border-style': 'none', 'border-top-style': 'solid', 'border-color': 'black', 'background-color': 'rgba(163, 250, 246, 0.09)'});
 
         }
@@ -92,35 +132,6 @@
         });
 
 
-        // If someone clicks tweet user, then bring up modal showing that user's tweets
-        //Options for myModal;
-
-        var tweetUsers = _.keys(streams.users)
-
-        var userTweets = function (thisUser){
-          _.each(streams.users[thisUser], function (tweetObj){
-            var $tweet = $("<div class='oldT'></div>");
-            var $tweetTime = tweetObj.created_at; // Change date format later
-            $tweet.html('@' + tweetObj.user + ': ' + $tweetTime + '<br/>' + tweetObj.message);
-            $tweet.insertAfter($('.tweeter').find('h1'));
-            $tweet.show();
-          });
-        }
-
-        _.each(tweetUsers, function (user) {
-          $('.'+user).click(function () {
-            $('#myModal').reveal({
-              animation: 'fadeAndPop',                   //fade, fadeAndPop, none
-              animationspeed: 300,                       //how fast animtions are
-              closeonbackgroundclick: true,              //if you click background will modal close?
-              dismissmodalclass: 'close-reveal-modal'    //the class of a button or element that will close an open modal
-            });
-            
-            $('.tweeter').find('h1').text('@'+user);
-            $('.tweeter').find('.oldT').remove();
-            userTweets(user);
-          });
-        })
 
       });
 
