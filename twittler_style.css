@@ -1,23 +1,17 @@
-<style type="text/css">
+<style type="css/text">
 
-html, body {
-	background-color: #fff;
-	background-size: 750px;
-	margin: auto;
-	background-image: url("http://www.todayandtomorrow.net/wp-content/uploads/2009/11/new_stripes.jpg");
+body {
+	background-color: green;
 }
 
 button {
 	display: block;
-	
 	border-top-style: dotted;
 	border-bottom-style: dotted;
 	border-left-style: none;
 	border-right-style: none;
 	border-color: black;
-
 	margin-top: 40px;
-
 	color: rgba(218, 216, 217);
 	background-color: rgba(163, 250, 246, 0.35);
 	border-radius: 2px;
@@ -27,18 +21,25 @@ button {
 .center {
 	margin-left: auto;
 	margin-right: auto;
-	width: 70%;
+	width: 40%;
 }
 
-.tweet {
+.oldT {
 	padding: 5px;
 	border-top-style: solid;
 	border-color: black;
 	background-color: rgba(163, 250, 246, 0.09);
 	font-size: 15px;
+	display: none;
 }
 
-.hidden {
+.newT {
+	font-weight: bold;
+	padding: 5px;
+	border-style: solid;
+	border-color: #00008B; /* DarkBlue */ 
+	background-color: #FFFFE0; /* Light Yellow */
+	font-size: 16px;
 	display: none;
 }
 

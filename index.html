@@ -40,25 +40,30 @@
           while(index < streams.home.length){
             var tweet = streams.home[index];
             if (visibleTweets.indexOf(tweet.created_at) == -1){
-              var $tweet = $("<div class='center tweet hidden'></div>");
+              // new tweets are highlighted at first, then fade back to old color
+              var $tweet = $("<div class='center oldT'></div>");
               var $tweetTime = tweet.created_at // Change date format later
               $tweet.html('@' + tweet.user + ': ' + $tweetTime + '<br/>' + tweet.message);
               $tweet.insertAfter($('button'));  
+              $tweet.fadeIn(1000);
               visibleTweets.push(tweet.created_at);
-              $tweet.removeClass('hidden');
             }
             index += 1;
-          } 
+          }
+          //$(.newT).animate({'border-style': 'none', 'border-top-style': 'solid', 'border-color': 'black', 'background-color': 'rgba(163, 250, 246, 0.09)'});
+
         }
         
         addTweets();
 
+        // If Refresh Tweets button clicked, add new tweets, reset button and title text.
         $('button').on('click', function() {
           addTweets();
           $('button').html('0 new tweets available');
           $('title').html('Twittler');
         });
 
+        // Every 3 seconds, check to see if new tweets have been written
         setInterval(function () {
             var newTweets = 0;
             var index = 0;
