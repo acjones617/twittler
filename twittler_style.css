@@ -5,7 +5,7 @@ html {
 }
 
 body {
-	background-image: url('subtle_leaves.jpg');
+	background-image: url('blur_leaves.jpg');
 	background-color: green;
 }
 
@@ -44,6 +44,10 @@ button {
 	border-color: #00008B; /* DarkBlue */ 
 	background-color: #FFFFE0; /* Light Yellow */
 	font-size: 16px;
+}
+
+.metaTime {
+	display: none;
 }
 
 
