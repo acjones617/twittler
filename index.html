@@ -47,7 +47,7 @@
           _.each(streams.users[thisUser], function (tweetObj){
             var $tweet = $("<div class='oldT'></div>");
             var $tweetTime = moment(tweetObj.created_at).fromNow(); // Change date format later
-            $tweet.html('@' + tweetObj.user + ': ' + $tweetTime + '<br/>' + tweetObj.message);
+            $tweet.html('@' + tweetObj.user + ': <span class="tweetTime">' + $tweetTime + '</span><br/><span class="tweetMessage">' + tweetObj.message + '</span>');
             $tweet.insertAfter($('.numTweets'));
             $tweet.show();
           });
@@ -61,14 +61,14 @@
             $('.'+thisUser).click(function () {
               $('#myModal').reveal({
                 //Options for myModal;
-                animation: 'fade',                   //fade, fadeAndPop, none
+                animation: 'fade',                         //fade, fadeAndPop, none
                 animationspeed: 300,                       //how fast animtions are
                 closeonbackgroundclick: true,              //if you click background will modal close?
                 dismissmodalclass: 'close-reveal-modal'    //the class of a button or element that will close an open modal
               });
               
               $('.tweeter').find('h1').text('@'+thisUser + ' tweet timeline');
-              $('.numTweets').html('Tweets: <b>' + streams.users[thisUser].length + '</b>');
+              $('.numTweets').html('Tweets: <span class="number">' + streams.users[thisUser].length + '</span>');
               $('.tweeter').find('.oldT').remove();
               userTweets(thisUser);
             });

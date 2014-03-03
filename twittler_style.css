@@ -46,9 +46,18 @@ button {
 	font-size: 16px;
 }
 
-.metaTime {
-	display: none;
+.number {
+	font-weight: 900;
+	font-size: 20px;
 }
 
+.tweetTime {
+	font-size: 14px;
+	font-style: italic;
+}
+
+.tweetMessage {
+	font-weight: bold;
+}
 
 </style>
