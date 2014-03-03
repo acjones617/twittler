@@ -40,7 +40,6 @@
         var visibleTweets = [];
 
         // If someone clicks tweet user, then bring up modal showing that user's tweets
-        
 
         // Function that pulls up relevant tweets for specific user
         var userTweets = function (thisUser){
@@ -48,7 +47,7 @@
             var $tweet = $("<div class='oldT'></div>");
             var $tweetTime = tweetObj.created_at; // Change date format later
             $tweet.html('@' + tweetObj.user + ': ' + $tweetTime + '<br/>' + tweetObj.message);
-            $tweet.insertAfter($('.tweeter').find('h1'));
+            $tweet.insertAfter($('.numTweets'));
             $tweet.show();
           });
         }
@@ -57,8 +56,8 @@
         var functionalizeUserLink = function () {
           var tweetUsers = _.keys(streams.users);
 
-          _.each(tweetUsers, function (user) {
-            $('.'+user).click(function () {
+          _.each(tweetUsers, function (thisUser) {
+            $('.'+thisUser).click(function () {
               $('#myModal').reveal({
                 //Options for myModal;
                 animation: 'fadeAndPop',                   //fade, fadeAndPop, none
@@ -66,10 +65,11 @@
                 closeonbackgroundclick: true,              //if you click background will modal close?
                 dismissmodalclass: 'close-reveal-modal'    //the class of a button or element that will close an open modal
               });
-            
-              $('.tweeter').find('h1').text('@'+user + ' tweet timeline');
+              
+              $('.tweeter').find('h1').text('@'+thisUser + ' tweet timeline');
+              $('.numTweets').html('Tweets: <b>' + streams.users[thisUser].length + '</b>');
               $('.tweeter').find('.oldT').remove();
-              userTweets(user);
+              userTweets(thisUser);
             });
           });
         };
@@ -96,7 +96,6 @@
           functionalizeUserLink();
 
           //$(.newT).animate({'border-style': 'none', 'border-top-style': 'solid', 'border-color': 'black', 'background-color': 'rgba(163, 250, 246, 0.09)'});
-
         }
         
         // Screen opens with 10 tweets from data_generator.js
@@ -131,8 +130,6 @@
           $('title').html('Twittler');
         });
 
-
-
       });
 
     </script>
@@ -143,6 +140,7 @@
 
     <div id="myModal" class="reveal-modal tweeter">
       <h1>Modal Tweets</h1>
+      <p class="numTweets">Tweets: </p>
       <a class="close-reveal-modal">&#215;</a>
     </div>
 

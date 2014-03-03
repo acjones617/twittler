@@ -20,7 +20,8 @@
 		left: 50%;
 		margin-left: -300px;
 		width: 520px;
-		background: #eee url(modal-gloss.png) no-repeat -200px -80px;
+		/*background: #eee url(modal-gloss.png) no-repeat -200px -80px;*/
+		background-color: rgb(208, 208, 243); /* Light grayish-blue */
 		position: absolute;
 		z-index: 101;
 		padding: 30px 40px 34px;
@@ -31,6 +32,11 @@
 		-webkit-box-shadow: 0 0 10px rgba(0,0,0,.4);
 		-box-shadow: 0 0 10px rgba(0,0,0,.4);
 		}
+
+	.numTweets {
+		font-size: 14;
+		font-family: arial;
+	}
 		
 	.reveal-modal.small 		{ width: 200px; margin-left: -140px;}
 	.reveal-modal.medium 		{ width: 400px; margin-left: -240px;}
