@@ -16,10 +16,30 @@ button {
 	border-left-style: none;
 	border-right-style: none;
 	border-color: black;
-	margin-top: 40px;
+	margin-top: 0px;
 	background-color: rgba(204, 197, 218, 0.74);;
-	border-radius: 2px;
-  font-size: 18px;
+	border-radius: 20px;
+  	font-size: 20px;
+  	margin-left: auto;
+  	margin-right: auto;
+  	width: 100%;
+  	padding: 5px;
+}
+
+.input {
+	display: none;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 16px;
+}
+
+.tweets {
+	padding: 10px;
+	border-radius: 20px;
+	border-style: solid;
+	border-width: 5px;
+	margin-top: 30px;
+	background-color: rgba(255,255,255,0.5);
 }
 
 .center {
@@ -32,18 +52,20 @@ button {
 	padding: 5px;
 	border-top-style: solid;
 	border-color: black;
+	border-radius: 5px;
 	background-color: rgba(215, 235, 180, 0.42);
-	font-size: 15px;
+	font-size: 16px;
 	display: none;
 }
 
 .newT {
 	font-weight: bold;
 	padding: 5px;
-	border-style: solid;
+	border-top-style: solid;
 	border-color: #00008B; /* DarkBlue */ 
-	background-color: #FFFFE0; /* Light Yellow */
+	background-color: yellow; /* Light Yellow */
 	font-size: 16px;
+	display: none;
 }
 
 .number {

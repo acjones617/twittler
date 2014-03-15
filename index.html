@@ -22,6 +22,13 @@
       Display the timestamps of when the tweets were created.
       Design your interface so that you want to look at and use the product you're making.
       Allow the user to click on a username to see that user's timeline.
+      
+      EC:
+      Show when the tweets were created in a human-friendly way (eg "10 minutes ago"). You'll want to find and use a library for this.
+      Allow the user to tweet. (This is going to require you to understand a little more about data_generator.js, but you shouldn't need to modify anything.)
+
+      TO DO:
+      FIX: After new tweets button is clicked and I scroll around, clicking on username leads to user's tweets box showing up on very bottom of page??
       */
 
       /*
@@ -46,10 +53,12 @@
         var userTweets = function (thisUser){
           _.each(streams.users[thisUser], function (tweetObj){
             var $tweet = $("<div class='oldT'></div>");
-            var $tweetTime = moment(tweetObj.created_at).fromNow(); // Change date format later
-            $tweet.html('@' + tweetObj.user + ': <span class="tweetTime">' + $tweetTime + '</span><br/><span class="tweetMessage">' + tweetObj.message + '</span>');
+            var $tweetTime = moment(tweetObj.created_at).fromNow();
+            $tweet.html('@' + tweetObj.user + ': <span class="tweetTime" data-time="' + tweetObj.created_at + '">' + $tweetTime + '</span><br/><span class="tweetMessage">' + tweetObj.message + '</span>');
             $tweet.insertAfter($('.numTweets'));
+
             $tweet.show();
+            //$("<p>" + $(document).scrolltop() + "</p>").insertAfter($('.numTweets'));
           });
         }
 
@@ -58,7 +67,8 @@
           var tweetUsers = _.keys(streams.users);
 
           _.each(tweetUsers, function (thisUser) {
-            $('.'+thisUser).click(function () {
+            $('.'+thisUser).click(function (event) {
+              event.preventDefault();
               $('#myModal').reveal({
                 //Options for myModal;
                 animation: 'fade',                         //fade, fadeAndPop, none
@@ -75,22 +85,26 @@
           });
         };
 
+        // Function that adds tweets to main page
         var addTweets = function (){
-          var index = 0;
-          
           _.each(streams.home, function (tweet, index) {
             if (visibleTweets.indexOf(tweet.created_at) == -1){
-              var $tweet = $("<div class='center oldT'><p class='userName'></p></div>");
+              var $tweet = $("<div class='oldT'><p class='userName'></p></div>");
               var tweetTime = moment(tweet.created_at).fromNow();
               $tweet.html('<a href="#" data-reveal-id="myModal" class="tweeterClick ' + tweet.user + '">@'+tweet.user+'</a>: <span class="tweetTime" data-time="'+tweet.created_at+'">' + tweetTime + '</span><br/><span class="tweetMessage">' + tweet.message + '</span>');
-              $tweet.insertAfter($('button'));
+              $tweet.insertAfter($('.input'));
 
-              // New Tweets start as hidden, fade in over course of 1 second. Change to highlighted at first and then fade in?
-              $tweet.fadeIn(1000);
+              // New Tweets start as hidden, slide down over course of 1 second. Change to highlighted at first and then fade in?
+              //$tweet.fadeIn(1000);
+              $tweet.slideDown(1000);
               visibleTweets.push(tweet.created_at);
-
+              /*
+              setTimeout(function () {
+                $tweet.addClass('oldT');
+                $tweet.removeClass('newT');
+              }, 1100);
+              */
             }
-            index += 1;
           });
 
           // Ensure modal works for all new user links
@@ -131,7 +145,8 @@
           }, 3000);
 
         // If Fresh Tweets button clicked, add new tweets, reset button and title text.
-        $('button').on('click', function() {
+        $('button').on('click', function (event) {
+          event.preventDefault();
           addTweets();
           $('button').html('0 new tweets available');
           $('title').html('Twittler');
@@ -140,9 +155,17 @@
       });
 
     </script>
+    <div class="tweets center">
 
     <div class="refresh">
-      <button type='button' class='center'>0 new tweets available</button>
+      <button type='button' class='addTweetbutton'>0 new tweets available</button>
+    </div>
+
+    <form class='input'>
+      Tweet!: <input type="text" name="firstname">
+    </form>
+
+
     </div>
 
     <div id="myModal" class="reveal-modal tweeter">

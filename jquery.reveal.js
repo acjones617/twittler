@@ -46,7 +46,7 @@
  Global Variables
 ----------------------------*/
         	var modal = $(this),
-        		topMeasure  = parseInt(modal.css('top')),
+        		topMeasure  = parseInt($('.reveal-modal').css('top')),
 				topOffset = modal.height() + topMeasure,
           		locked = false,
 				modalBG = $('.reveal-modal-bg');
@@ -76,7 +76,7 @@
 						}, options.animationspeed,unlockModal());					
 					}
 					if(options.animation == "fade") {
-						modal.css({'opacity' : 0, 'visibility' : 'visible', 'top': $(document).scrollTop()+topMeasure});
+						modal.css({'opacity' : 0, 'visibility' : 'visible', 'top': $(document).scrollTop() + 100});
 						modalBG.fadeIn(options.animationspeed/2);
 						modal.delay(options.animationspeed/2).animate({
 							"opacity" : 1
