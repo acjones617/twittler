@@ -9,7 +9,7 @@ body {
 	background-color: green;
 }
 
-button {
+.addTweetButton {
 	display: block;
 	border-top-style: dotted;
 	border-bottom-style: dotted;
@@ -26,11 +26,13 @@ button {
   	padding: 5px;
 }
 
-.input {
-	display: none;
-	margin-left: auto;
-	margin-right: auto;
+.userNameInput {
+	text-align: left;
 	font-size: 16px;
+}
+
+.tweetInput {
+	text-align: right;
 }
 
 .tweets {
