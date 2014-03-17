@@ -92,7 +92,7 @@
               var $tweet = $("<div class='oldT'><p class='userName'></p></div>");
               var tweetTime = moment(tweet.created_at).fromNow();
               $tweet.html('<a href="#" data-reveal-id="myModal" class="tweeterClick ' + tweet.user + '">@'+tweet.user+'</a>: <span class="tweetTime" data-time="'+tweet.created_at+'">' + tweetTime + '</span><br/><span class="tweetMessage">' + tweet.message + '</span>');
-              $tweet.insertAfter($('.sendTweet'));
+              $tweet.insertAfter($('.inputTweetDiv'));
 
               // New Tweets start as hidden, slide down over course of 1 second. Change to highlighted at first and then fade in?
               //$tweet.fadeIn(1000);
@@ -116,8 +116,9 @@
         // Screen opens with 10 tweets from data_generator.js
         addTweets();
 
-        // Every 3 seconds, check to see if new tweets have been written, update times
-        setInterval(function () {
+        // function that resets new tweet button depending on how many new tweets are in the queue
+        // called every 3 seconds, and whenever a user inputs a new tweet.
+        var numTweetChecker = function () {
             var newTweets = 0;
             var index = 0;
             while (index < streams.home.length) {
@@ -136,6 +137,11 @@
             if (newTweets >= 1) {
               $('title').html('(' + newTweets + ') Twittler');
             }
+          };
+
+        // Every 3 seconds, check to see if new tweets have been written, update times
+        setInterval(function () {
+            numTweetChecker();
 
             // Update the visible times since given tweet was tweeted
             $('.tweetTime').each(function (index) {
@@ -152,20 +158,37 @@
           $('title').html('Twittler');
         });
 
-        // If submit new tweet button clicked, submit tweet.
-        /*
-        $('.tweetButton').on('click', function (event) {
-          event.preventDefault();
-          var userName = $(.userName).val();
-          var tweet = $(.userTweet).val();
-          if (streams.users[userName]) {
-            streams.users[userName].push(tweet);
-          } else {
-            streams.user[userName] = [tweet];
+        var writeTweet = function () {
+            var userName = $('.inputUserName').val();
+            var userMessage = $('.inputUserTweet').val();
+            var tweet = {};
+            tweet.user = userName;
+            tweet.message = userMessage;
+            tweet.created_at = new Date();
+            if (!streams.users[userName]) {
+              streams.users[userName] = [tweet];  
+            } else {
+              streams.users[userName].push(tweet);
+            }
+            streams.home.push(tweet);
+
+            $('.inputUserTweet').val('');
+            numTweetChecker();
+        };
+
+        $('.inputUserTweet').keyup(function(e){
+          if (e.keyCode == 13 || e.which == 13){
+            event.preventDefault();
+            writeTweet();
           }
-          streams.home.push(tweet);
         });
-*/
+
+        // If submit new tweet button clicked, submit tweet, refresh new tweets button, clear tweet text.
+        $('.sendTweet').on('click', function (event) {
+          event.preventDefault();
+          writeTweet();
+        });
+        
       });
 
     </script>
@@ -175,15 +198,15 @@
       <button type='button' class='addTweetButton'>0 new tweets available</button>
     </div>
 
-    <div class="sendTweet">
+    <div class="inputTweetDiv">
       <span class='userNameInput'> 
         User Name: 
-        <input class="userName" type="text"/>
+        <input class="inputUserName" type="text"/>
       </span>
       <span class='tweetInput'> 
         Tweet! 
-        <input class="userTweet" type="text"/> 
-        <button class="tweetButton">Send</button>
+        <input class="inputUserTweet" type="text"/> 
+        <button class="sendTweet">Send</button>
       </span>
 
     </div>
