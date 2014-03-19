@@ -9,30 +9,10 @@ body {
 	background-color: green;
 }
 
-.addTweetButton {
-	display: block;
-	border-top-style: dotted;
-	border-bottom-style: dotted;
-	border-left-style: none;
-	border-right-style: none;
-	border-color: black;
-	margin-top: 0px;
-	background-color: rgba(204, 197, 218, 0.74);;
-	border-radius: 20px;
-  	font-size: 20px;
-  	margin-left: auto;
-  	margin-right: auto;
-  	width: 100%;
-  	padding: 5px;
-}
-
-.userNameInput {
-	text-align: left;
-	font-size: 16px;
-}
-
-.tweetInput {
-	text-align: right;
+input {
+	box-shadow:
+		inset 0 0 5px rgba(0,0,0,0.1),
+			  0 0 10px rgba(0,0,0,0.1);
 }
 
 .tweets {
@@ -44,10 +24,94 @@ body {
 	background-color: rgba(255,255,255,0.5);
 }
 
+.inputTweetDiv {
+	margin: 5px;
+	padding-top: 22px;
+	padding-bottom: 12px;
+	border-radius: 20px;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-width: 2px;
+	background-color: rgba(255,255,255,0.2);
+	font-style: italic;
+	font-size: 20px;
+}
+
+.userNameInput {
+	margin: 3px;
+	padding: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border: 3px solid rgba(215, 235, 180, 1.00);
+	border-radius: 20px;
+	background-color: rgba(215, 235, 180, 0.42);
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.tweetInput {
+	margin: 3px;
+	padding: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border: 3px solid rgba(215, 235, 180, 1.00);
+	border-radius: 20px;
+	background-color: rgba(215, 235, 180, 0.42);
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.inputUserTweet {
+	width: 200px;
+}
+
+
+.addTweetButton {
+	display: block;
+	border-top-style: dotted;
+	border-bottom-style: dotted;
+	border-left-style: none;
+	border-right-style: none;
+	border-color: black;
+	margin-top: 0px;
+	background-color: rgba(92, 180, 142, 0.29);
+	border-radius: 20px;
+  	font-size: 24px;
+  	margin-left: auto;
+  	margin-right: auto;
+  	width: 100%;
+  	padding: 5px;
+}
+
+.sendTweet {
+	display: block;
+	border-top-style: dotted;
+	border-bottom-style: dotted;
+	border-left-style: none;
+	border-right-style: none;
+	border-color: black;
+	margin-top: 0px;
+	background-color: rgba(92, 180, 142, 0.29);
+	border-radius: 20px;
+  	font-size: 20px;
+  	margin-left: auto;
+  	margin-right: auto;
+  	width: 60%;
+  	padding: 2px;
+}
+
 .center {
 	margin-left: auto;
 	margin-right: auto;
 	width: 55%;
+}
+
+.centerish {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	width: 100%;
+
 }
 
 .oldT {
