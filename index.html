@@ -15,38 +15,33 @@
   <body>
     <script>
 
-      /*
-      Requirements:
-
-      Show the user new tweets somehow. (You can show them automatically as they're created, or create a button that displays new tweets.)
-      Display the timestamps of when the tweets were created.
-      Design your interface so that you want to look at and use the product you're making.
-      Allow the user to click on a username to see that user's timeline.
-      
-      EC:
-      Show when the tweets were created in a human-friendly way (eg "10 minutes ago"). You'll want to find and use a library for this.
-      Allow the user to tweet. (This is going to require you to understand a little more about data_generator.js, but you shouldn't need to modify anything.)
-
-      TO DO:
-      FIX: After new tweets button is clicked and I scroll around, clicking on username leads to user's tweets box showing up on very bottom of page??
-      */
-
-      /*
-      Data generator does :
-
-      Creates two global variables, users and streams.
-        users is an array of strings -- all the usernames that you're following.
-        streams is an object with two properties, users and home.
-          streams.home is an array of all tweets from all the users you're following.
-          streams.users is an object with properties for each user. streams.users.shawndrost has all of shawndrost's tweets.
-      */
-
       $(document).ready(function(){
-//       var $body = $('body');
-//       $body.html('');
 
         var visibleTweets = [];
 
+        // Function that adds tweets to main page
+        var addTweets = function (){
+          _.each(streams.home, function (tweet, index) {
+            if (visibleTweets.indexOf(tweet.created_at) == -1){
+              var $tweet = $("<div class='oldT'><p class='userName'></p></div>");
+              var tweetTime = moment(tweet.created_at).fromNow();
+              $tweet.html('<a href="#" data-reveal-id="myModal" class="tweeterClick ' + tweet.user + '">@'+tweet.user+'</a>: <span class="tweetTime" data-time="'+tweet.created_at+'">' + tweetTime + '</span><br/><span class="tweetMessage">' + tweet.message + '</span>');
+              $tweet.insertAfter($('.inputTweetDiv'));
+
+              // New Tweets start as hidden, slide down over course of 1 second.
+              $tweet.slideDown(1000);
+              visibleTweets.push(tweet.created_at);
+            }
+          });
+
+          // Ensure modal works for all new user links
+          functionalizeUserLink();
+
+          // After adding tweets, ensure button and site title show correct info
+          $('.addTweetButton').html('0 new tweets available');
+          $('title').html('Twittler');
+        }
+        
         // If someone clicks tweet user, then bring up modal showing that user's tweets
 
         // Function that pulls up relevant tweets for specific user
@@ -56,9 +51,7 @@
             var $tweetTime = moment(tweetObj.created_at).fromNow();
             $tweet.html('@' + tweetObj.user + ': <span class="tweetTime" data-time="' + tweetObj.created_at + '">' + $tweetTime + '</span><br/><span class="tweetMessage">' + tweetObj.message + '</span>');
             $tweet.insertAfter($('.numTweets'));
-
             $tweet.show();
-            //$("<p>" + $(document).scrolltop() + "</p>").insertAfter($('.numTweets'));
           });
         }
 
@@ -84,40 +77,12 @@
             });
           });
         };
-
-        // Function that adds tweets to main page
-        var addTweets = function (){
-          _.each(streams.home, function (tweet, index) {
-            if (visibleTweets.indexOf(tweet.created_at) == -1){
-              var $tweet = $("<div class='oldT'><p class='userName'></p></div>");
-              var tweetTime = moment(tweet.created_at).fromNow();
-              $tweet.html('<a href="#" data-reveal-id="myModal" class="tweeterClick ' + tweet.user + '">@'+tweet.user+'</a>: <span class="tweetTime" data-time="'+tweet.created_at+'">' + tweetTime + '</span><br/><span class="tweetMessage">' + tweet.message + '</span>');
-              $tweet.insertAfter($('.inputTweetDiv'));
-
-              // New Tweets start as hidden, slide down over course of 1 second. Change to highlighted at first and then fade in?
-              //$tweet.fadeIn(1000);
-              $tweet.slideDown(1000);
-              visibleTweets.push(tweet.created_at);
-              /*
-              setTimeout(function () {
-                $tweet.addClass('oldT');
-                $tweet.removeClass('newT');
-              }, 1100);
-              */
-            }
-          });
-
-          // Ensure modal works for all new user links
-          functionalizeUserLink();
-
-          //$(.newT).animate({'border-style': 'none', 'border-top-style': 'solid', 'border-color': 'black', 'background-color': 'rgba(163, 250, 246, 0.09)'});
-        }
-        
+       
         // Screen opens with 10 tweets from data_generator.js
         addTweets();
 
         // function that resets new tweet button depending on how many new tweets are in the queue
-        // called every 3 seconds, and whenever a user inputs a new tweet.
+        // called every 3 seconds.
         var numTweetChecker = function () {
             var newTweets = 0;
             var index = 0;
@@ -154,8 +119,6 @@
         $('.addTweetButton').on('click', function (event) {
           event.preventDefault();
           addTweets();
-          $('.addTweetButton').html('0 new tweets available');
-          $('title').html('Twittler');
         });
 
 
@@ -184,18 +147,20 @@
             numTweetChecker();           
         };
 
-        // If enter key hit while tweet message box selected, submit tweet
+        // If enter key hit while tweet message box selected, submit tweet, add all tweets
         $('.inputUserTweet').keyup(function(e){
           if (e.keyCode == 13 || e.which == 13){
             event.preventDefault();
             writeTweet();
+            addTweets();
           }
         });
 
-        // If submit new tweet button clicked, submit tweet
+        // If submit new tweet button clicked, submit tweet, add all tweets
         $('.sendTweet').on('click', function (event) {
           event.preventDefault();
           writeTweet();
+          addTweets();
         });
         
       });
