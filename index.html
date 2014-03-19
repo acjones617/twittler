@@ -23,9 +23,9 @@
         var addTweets = function (){
           _.each(streams.home, function (tweet, index) {
             if (visibleTweets.indexOf(tweet.created_at) == -1){
-              var $tweet = $("<div class='oldT'><p class='userName'></p></div>");
+              var $tweet = $("<div class='oldT'><p></p></div>");
               var tweetTime = moment(tweet.created_at).fromNow();
-              $tweet.html('<a href="#" data-reveal-id="myModal" class="tweeterClick ' + tweet.user + '">@'+tweet.user+'</a>: <span class="tweetTime" data-time="'+tweet.created_at+'">' + tweetTime + '</span><br/><span class="tweetMessage">' + tweet.message + '</span>');
+              $tweet.html('<a href="#" data-reveal-id="myModal" class="' + tweet.user + '">@'+tweet.user+'</a>: <span class="tweetTime" data-time="'+tweet.created_at+'">' + tweetTime + '</span><br/><span class="tweetMessage">' + tweet.message + '</span>');
               $tweet.insertAfter($('.inputTweetDiv'));
 
               // New Tweets start as hidden, slide down over course of 1 second.
@@ -77,9 +77,6 @@
             });
           });
         };
-       
-        // Screen opens with 10 tweets from data_generator.js
-        addTweets();
 
         // function that resets new tweet button depending on how many new tweets are in the queue
         // called every 3 seconds.
@@ -160,33 +157,34 @@
         $('.sendTweet').on('click', function (event) {
           event.preventDefault();
           writeTweet();
-          addTweets();
+          addTweets()
         });
+
+        // Screen opens with 10 tweets from data_generator.js
+        addTweets();
         
       });
 
     </script>
     <div class="tweets center">
 
-    <div class="refresh">
+    <div>
       <button type='button' class='addTweetButton'>0 new tweets available</button>
     </div>
 
     <div class="inputTweetDiv">
-      <div class="centerish">
-        <span class='userNameInput'> 
+      <div class="centertext">
+        <span class='userInput'> 
           User Name: 
           <input class="inputUserName" type="text" maxlength="30"/>
         </span>
-        <span class='tweetInput'> 
+        <span class='userInput'> 
           <input class="inputUserTweet" type="text" maxlength="140"/> 
           Message
         </span>
       </div>
       <br>
       <button class="sendTweet center">Tweet!</button>
-      
-
     </div>
 
     <div id="myModal" class="reveal-modal tweeter tweet">

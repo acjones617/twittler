@@ -6,7 +6,6 @@ html {
 
 body {
 	background-image: url('subtle_leaves.jpg');
-	background-color: green;
 }
 
 input {
@@ -37,19 +36,7 @@ input {
 	font-size: 20px;
 }
 
-.userNameInput {
-	margin: 3px;
-	padding: 8px;
-	padding-left: 10px;
-	padding-right: 10px;
-	border: 3px solid rgba(215, 235, 180, 1.00);
-	border-radius: 20px;
-	background-color: rgba(215, 235, 180, 0.42);
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.tweetInput {
+.userInput {
 	margin: 3px;
 	padding: 8px;
 	padding-left: 10px;
@@ -103,10 +90,10 @@ input {
 .center {
 	margin-left: auto;
 	margin-right: auto;
-	width: 55%;
+	width: 65%;
 }
 
-.centerish {
+.centertext {
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
